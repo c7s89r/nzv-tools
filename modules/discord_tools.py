@@ -736,45 +736,104 @@ def discord_server_cloner(tk):
     h = {"Authorization": tk, "Content-Type": "application/json"}
     def _get(ep): return requests.get(f"https://discord.com/api/v9{ep}", headers=h)
     def _post(ep, d): return requests.post(f"https://discord.com/api/v9{ep}", headers=h, json=d)
+    def _patch(ep, d): return requests.patch(f"https://discord.com/api/v9{ep}", headers=h, json=d)
     def _delete(ep): return requests.delete(f"https://discord.com/api/v9{ep}", headers=h)
+    def _put_file(ep, fp, fn):
+        with open(fp, "rb") as f:
+            return requests.put(f"https://discord.com/api/v9{ep}", headers={"Authorization": tk}, files={"file": (fn, f)})
     print(Colorate.Horizontal(cl["num"], "  [>] Fetching source data..."))
+    src_guild = _get(f"/guilds/{src}")
     r_roles = _get(f"/guilds/{src}/roles")
     r_chans = _get(f"/guilds/{src}/channels")
+    r_emojis = _get(f"/guilds/{src}/emojis")
+    r_stickers = _get(f"/guilds/{src}/stickers")
     if r_roles.status_code != 200 or r_chans.status_code != 200:
         print(Colorate.Horizontal(cl["num"], "  [!] Error fetching guild data. Check IDs/Token permissions."))
         input("\n  Press Enter...")
         return
+    guild_data = src_guild.json() if src_guild.status_code == 200 else {}
     roles = r_roles.json()
     chans = sorted(r_chans.json(), key=lambda x: x.get("position", 0))
-    print(Colorate.Horizontal(cl["head"], f"  [+] Found {len(roles)} roles and {len(chans)} channels."))
+    emojis = r_emojis.json() if r_emojis.status_code == 200 else []
+    stickers = r_stickers.json() if r_stickers.status_code == 200 else []
+    print(Colorate.Horizontal(cl["head"], f"  [+] Found {len(roles)} roles, {len(chans)} channels, {len(emojis)} emojis, {len(stickers)} stickers."))
+
     if get_inpt("Clear target guild first? (y/n):").lower() == 'y':
-        print(Colorate.Horizontal(cl["num"], "  [!] Clearing target..."))
-        target_chans_req = _get(f"/guilds/{dst}/channels")
-        if target_chans_req.status_code == 200:
-            target_chans = target_chans_req.json()
-            for c in target_chans:
+        print(Colorate.Horizontal(cl["num"], "  [!] Clearing target (emojis, channels, roles)..."))
+        target_emojis = _get(f"/guilds/{dst}/emojis")
+        if target_emojis.status_code == 200:
+            for e in target_emojis.json():
+                _delete(f"/guilds/{dst}/emojis/{e['id']}")
+                time.sleep(0.3)
+        target_chans = _get(f"/guilds/{dst}/channels")
+        if target_chans.status_code == 200:
+            for c in target_chans.json():
                 _delete(f"/channels/{c['id']}")
                 time.sleep(0.3)
-        target_roles_req = _get(f"/guilds/{dst}/roles")
-        if target_roles_req.status_code == 200:
-            target_roles = target_roles_req.json()
-            for r in target_roles:
+        target_roles = _get(f"/guilds/{dst}/roles")
+        if target_roles.status_code == 200:
+            for r in target_roles.json():
                 if r["name"] != "@everyone":
                     _delete(f"/guilds/{dst}/roles/{r['id']}")
                     time.sleep(0.3)
-    print(Colorate.Horizontal(cl["head"], "  [+] Cloning Roles..."))
+
+    if src_guild.status_code == 200:
+        print(Colorate.Horizontal(cl["head"], "  [+] Cloning server settings..."))
+        s = {}
+        if guild_data.get("name"): s["name"] = guild_data["name"]
+        if guild_data.get("description"): s["description"] = guild_data["description"]
+        if guild_data.get("system_channel_id"): s["system_channel_id"] = None
+        if s: _patch(f"/guilds/{dst}", s)
+
+    print(Colorate.Horizontal(cl["head"], "  [+] Cloning roles..."))
+    role_map = {}
     for r in reversed(roles):
         if r["name"] == "@everyone": continue
         p = {"name": r["name"], "permissions": r["permissions"], "color": r["color"], "hoist": r["hoist"], "mentionable": r["mentionable"]}
-        _post(f"/guilds/{dst}/roles", p)
-        print(Colorate.Horizontal(cl["txt"], f"  [>] Created role: {r['name']}"))
+        res = _post(f"/guilds/{dst}/roles", p)
+        if res.status_code in [200, 201]:
+            new_id = res.json()["id"]
+            role_map[r["id"]] = new_id
+            print(Colorate.Horizontal(cl["txt"], f"  [>] Created role: {r['name']}"))
         time.sleep(0.5)
 
-    print(Colorate.Horizontal(cl["head"], "  [+] Cloning Categories & Channels..."))
-    cat_map = {} 
-    
+    print(Colorate.Horizontal(cl["head"], "  [+] Cloning emojis..."))
+    for e in emojis:
+        if e.get("animated"):
+            url = f"https://cdn.discordapp.com/emojis/{e['id']}.gif"
+        else:
+            url = f"https://cdn.discordapp.com/emojis/{e['id']}.png"
+        try:
+            img_data = requests.get(url, timeout=10).content
+            import io as _io
+            _post(f"/guilds/{dst}/emojis", {"name": e["name"], "image": "data:image/png;base64," + __import__("base64").b64encode(img_data).decode()})
+            print(Colorate.Horizontal(cl["txt"], f"  [>] Created emoji: {e['name']}"))
+        except: print(Colorate.Horizontal(cl["num"], f"  [!] Failed emoji: {e['name']}"))
+        time.sleep(0.5)
+
+    print(Colorate.Horizontal(cl["head"], "  [+] Cloning stickers..."))
+    for s in stickers:
+        try:
+            url = f"https://cdn.discordapp.com/stickers/{s['id']}.png"
+            img_data = requests.get(url, timeout=10).content
+            fp = f"build/{s['id']}.png"
+            os.makedirs("build", exist_ok=True)
+            with open(fp, "wb") as f: f.write(img_data)
+            r = requests.post(f"https://discord.com/api/v9/guilds/{dst}/stickers",
+                headers={"Authorization": tk},
+                data={"name": s["name"], "tags": s["tags"], "description": s.get("description", "")},
+                files={"file": (f"{s['name']}.png", open(fp, "rb"))})
+            if r.status_code in [200, 201]:
+                print(Colorate.Horizontal(cl["txt"], f"  [>] Created sticker: {s['name']}"))
+            else:
+                print(Colorate.Horizontal(cl["num"], f"  [!] Failed sticker: {s['name']}"))
+        except: print(Colorate.Horizontal(cl["num"], f"  [!] Failed sticker: {s['name']}"))
+        time.sleep(0.5)
+
+    print(Colorate.Horizontal(cl["head"], "  [+] Cloning categories & channels..."))
+    cat_map = {}
     for c in chans:
-        if c["type"] == 4: 
+        if c["type"] == 4:
             p = {"name": c["name"], "type": 4}
             res = _post(f"/guilds/{dst}/channels", p)
             if res.status_code in [200, 201]:
@@ -784,14 +843,25 @@ def discord_server_cloner(tk):
 
     for c in chans:
         if c["type"] != 4:
-            p = {"name": c["name"], "type": c["type"], "topic": c.get("topic"), "nsfw": c.get("nsfw", False)}
+            p = {"name": c["name"], "type": c["type"], "topic": c.get("topic", ""), "nsfw": c.get("nsfw", False)}
+            if "bitrate" in c: p["bitrate"] = c["bitrate"]
+            if "user_limit" in c: p["user_limit"] = c["user_limit"]
+            if "rate_limit_per_user" in c: p["rate_limit_per_user"] = c["rate_limit_per_user"]
             if c.get("parent_id") in cat_map:
                 p["parent_id"] = cat_map[c["parent_id"]]
-            
+            if c.get("permission_overwrites"):
+                perms = []
+                for po in c["permission_overwrites"]:
+                    pid = role_map.get(po["id"], po["id"])
+                    perms.append({"id": pid, "type": po["type"], "allow": po["allow"], "deny": po["deny"]})
+                if perms:
+                    p["permission_overwrites"] = perms
             res = _post(f"/guilds/{dst}/channels", p)
             if res.status_code in [200, 201]:
                 print(Colorate.Horizontal(cl["txt"], f"  [>] Created channel: {c['name']}"))
+            else:
+                print(Colorate.Horizontal(cl["num"], f"  [!] Failed channel: {c['name']}"))
             time.sleep(0.5)
 
-    print(Colorate.Horizontal(cl["head"], "\n  [=] Cloning process finished."))
+    print(Colorate.Horizontal(cl["head"], "\n  [=] Clone complete."))
     input("  Press Enter...")
