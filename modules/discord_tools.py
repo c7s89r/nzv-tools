@@ -25,7 +25,7 @@ def _snd(url, d, m='POST'):
 def webhook_spam(url, msg, amt=10):
     cl = Theme.get_colors()
     print("\n  [+] Initializing spam...") 
-    sc, p = 0, {"content": msg, "username": "NZV Tools", "avatar_url": "https://i.ibb.co/Wv94YGVx/navi.png"}
+    sc, p = 0, {"content": msg, "username": "NZV Tools", "avatar_url": "https://i.postimg.cc/fkjm0zBc/k.jpg"}
     for i in range(amt):
         st = _snd(url, p)
         if st in [200, 204]:
@@ -549,7 +549,7 @@ def discord_username_checker():
                 payload = {
                     "content": "@everyone",
                     "username": "NZV",
-                    "avatar_url": "https://i.ibb.co/Wv94YGVx/navi.png",
+                    "avatar_url": "https://i.postimg.cc/fkjm0zBc/k.jpg",
                     "embeds": [{
                         "title": "✅ Available Username Found!",
                         "description": f"**`{username}`** is available on Discord!",
@@ -558,10 +558,10 @@ def discord_username_checker():
                             {"name": "Username", "value": f"`{username}`", "inline": True},
                             {"name": "Time", "value": timestamp, "inline": True},
                         ],
-                        "thumbnail": {"url": "https://i.ibb.co/Wv94YGVx/navi.png"},
+                        "thumbnail": {"url": "https://i.postimg.cc/fkjm0zBc/k.jpg"},
                         "footer": {
                             "text": "NZV Tools • https://github.com/c7s89r/nzv-tools",
-                            "icon_url": "https://i.ibb.co/Wv94YGVx/navi.png"
+                            "icon_url": "https://i.postimg.cc/fkjm0zBc/k.jpg"
                         },
                     }]
                 }

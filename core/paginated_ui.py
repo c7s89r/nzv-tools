@@ -66,28 +66,20 @@ class PaginatedUI:
         ]
         for l in fox:
             print(Colorate.Horizontal(colors["banner"], l.center(tw)))
-
-        stats = ""
-        if psutil:
-            try:
-                cpu = psutil.cpu_percent()
-                ram = psutil.virtual_memory().percent
-                stats = f"  cpu: {cpu:.0f}%  ram: {ram:.0f}%"
-            except:
-                pass
-        if stats:
-            print(Colorate.Horizontal(colors["txt"], stats.rjust(tw)))
         print()
 
     @staticmethod
     def draw_all_tools(colors):
         tw = shutil.get_terminal_size().columns
-        box_w = min(90, tw - 4)
-        margin = " " * max(0, (tw - box_w) // 2)
+        margin = ""
+        box_w = tw
 
         for cat_name, tools in CATEGORIES:
-            print(margin + Colorate.Horizontal(colors["head"], f"  {cat_name}"))
-            col_w = (box_w - 2) // 3
+            sep = "─" * box_w
+            print(Colorate.Horizontal(colors["num"], sep))
+            print(Colorate.Horizontal(colors["head"], f"  {cat_name}"))
+
+            col_w = box_w // 3
             for i in range(0, len(tools), 3):
                 line = ""
                 for j in range(3):
@@ -97,28 +89,41 @@ class PaginatedUI:
                         line += entry + " " * max(1, col_w - len(entry))
                     else:
                         line += " " * col_w
-                print(margin + Colorate.Horizontal(colors["txt"], line))
-            print()
+                print(Colorate.Horizontal(colors["txt"], line))
 
-        print(margin + Colorate.Horizontal(colors["txt"], "  60  app info    61  config    99  exit"))
-        print(margin + Colorate.Horizontal(colors["num"], "  " + "─" * (box_w - 2)))
+        print(Colorate.Horizontal(colors["num"], "─" * box_w))
+        print(Colorate.Horizontal(colors["txt"], "  60  app info    61  config    99  exit"))
+        print(Colorate.Horizontal(colors["num"], "─" * box_w))
 
     @classmethod
     def draw_dashboard(cls):
         clr()
         colors = Theme.get_colors()
         cls.draw_logo(colors)
+
+        stats = ""
+        if psutil:
+            try:
+                cpu = psutil.cpu_percent()
+                ram = psutil.virtual_memory().percent
+                stats = f"cpu: {cpu:.0f}%  ram: {ram:.0f}%"
+            except:
+                pass
+        if stats:
+            print(Colorate.Horizontal(colors["txt"], stats.center(shutil.get_terminal_size().columns)))
+            print()
+
         cls.draw_all_tools(colors)
 
     @staticmethod
     def draw_card_box(title, items):
         colors = Theme.get_colors()
         tw = shutil.get_terminal_size().columns
-        box_w = max(50, min(80, tw - 6))
-        margin = " " * max(0, (tw - box_w) // 2)
+        box_w = tw
+        margin = ""
 
-        print(margin + Colorate.Horizontal(colors["head"], f"  {title}"))
-        print(margin + Colorate.Horizontal(colors["num"], "  " + "─" * (box_w - 4)))
+        print(Colorate.Horizontal(colors["head"], f"  {title}"))
+        print(Colorate.Horizontal(colors["num"], "─" * box_w))
 
         list_items = list(items.items())
         col_w = box_w // 2
@@ -127,6 +132,6 @@ class PaginatedUI:
             k2, v2 = list_items[i + 1] if i + 1 < len(list_items) else ("", "")
             c1 = f"  {k1}  {v1:<{col_w - 5}}"
             c2 = f"  {k2}  {v2:<{col_w - 5}}" if k2 else ""
-            print(margin + Colorate.Horizontal(colors["txt"], c1 + c2))
+            print(Colorate.Horizontal(colors["txt"], c1 + c2))
 
-        print(margin + Colorate.Horizontal(colors["num"], "  " + "─" * (box_w - 4)))
+        print(Colorate.Horizontal(colors["num"], "─" * box_w))

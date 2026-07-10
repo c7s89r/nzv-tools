@@ -336,27 +336,17 @@ def _nbot_ui():
             break
 
 def run_app():
-    from core.paginated_ui import PaginatedUI, PAGES
-    current_page = 0
+    from core.paginated_ui import PaginatedUI
     while 1:
         _cl = Theme.get_colors()
         _cfg = get_config()
         
-        PaginatedUI.draw_dashboard(current_page)
+        PaginatedUI.draw_dashboard()
         
         _c_raw = get_inpt().strip()
         _c = _c_raw.lower()
         
-        if _c in ["a", "p"]:
-            current_page = (current_page - 1) % len(PAGES)
-            continue
-        elif _c in ["d", "n"]:
-            current_page = (current_page + 1) % len(PAGES)
-            continue
-        elif _c.startswith("p") and len(_c) == 2 and _c[1] in ["1", "2", "3", "4", "5", "6", "7"]:
-            current_page = int(_c[1]) - 1
-            continue
-        elif not _c:
+        if not _c:
             continue
             
         _c = _c.lstrip("0") if _c not in ["0", "00"] else "0"
