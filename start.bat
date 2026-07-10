@@ -1,6 +1,6 @@
 @echo off
-title NZV Tools
-echo Loading NZV Tools...
+chcp 65001 >nul
+title nzv tools
 
 python --version >nul 2>&1
 if %errorlevel% equ 0 (
@@ -14,23 +14,11 @@ if %errorlevel% equ 0 (
     goto run_main
 )
 
-cls
-color 0c
-echo ======================================================
-echo             ERROR: PYTHON NOT FOUND
-echo ======================================================
 echo.
-echo Python is not installed or not in PATH (environment variable).
+echo  ERROR: Python not found
 echo.
-echo Solution:
-echo 1. Download Python: https://www.python.org/downloads/
-echo 2. Run the installer.
-echo 3. IMPORTANT: Check the box at the bottom:
-echo    "Add python.exe to PATH" (or "Add Python to PATH")
-echo 4. Click "Install Now".
-echo 5. Restart this file.
-echo.
-echo ======================================================
+echo  Download: https://www.python.org/downloads/
+echo  Check "Add python.exe to PATH" during install
 echo.
 pause
 exit /b
@@ -39,11 +27,8 @@ exit /b
 %PYTHON_CMD% main.py
 if %errorlevel% neq 0 (
     echo.
-    echo [!] NZV Tools crashed or exited with an error (Code: %errorlevel%)
-    echo [!] Possible causes: Missing libraries, Python not in PATH, or code error.
-    echo [!] Try running 'install.bat' to fix library issues.
+    echo  [!] crashed (code: %errorlevel%)
+    echo  [!] run install.bat to fix dependencies
     echo.
     pause
 )
-
-

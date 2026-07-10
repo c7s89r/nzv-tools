@@ -2,6 +2,14 @@
 
 import sys, time, subprocess, json, os, threading, zipfile, io, shutil
 
+if os.name == 'nt':
+    os.system('chcp 65001 >nul')
+
+if hasattr(sys.stdout, 'reconfigure'):
+    sys.stdout.reconfigure(encoding='utf-8')
+if hasattr(sys.stdin, 'reconfigure'):
+    sys.stdin.reconfigure(encoding='utf-8')
+
 def _init():
     try: import pystyle, requests, selenium, dns.resolver, bs4, socks, websocket, piexif, exifread, mutagen, PyQt5
     except: subprocess.check_call([sys.executable, "-m", "pip", "install", "pystyle", "requests", "selenium", "dnspython", "beautifulsoup4", "pysocks", "websocket-client", "piexif", "exifread", "mutagen", "PyQt5", "-q"])
@@ -336,16 +344,23 @@ def _nbot_ui():
             break
 
 def run_app():
-    from core.paginated_ui import PaginatedUI
+    from core.paginated_ui import PaginatedUI, PAGES
+    current_page = 0
     while 1:
         _cl = Theme.get_colors()
         _cfg = get_config()
         
-        PaginatedUI.draw_dashboard()
+        PaginatedUI.draw_dashboard(current_page)
         
         _c_raw = get_inpt().strip()
         _c = _c_raw.lower()
         
+        if _c in ["a", "p"]:
+            current_page = (current_page - 1) % len(PAGES)
+            continue
+        elif _c in ["d", "n"]:
+            current_page = (current_page + 1) % len(PAGES)
+            continue
         if not _c:
             continue
             
