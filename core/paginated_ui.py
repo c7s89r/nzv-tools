@@ -49,7 +49,13 @@ class PaginatedUI:
     @staticmethod
     def draw_logo(colors):
         tw = shutil.get_terminal_size().columns
-        print(Colorate.Horizontal(colors["head"], "   n z v   t o o l s".center(tw)))
+        art = [
+            "█▀▀▄ ▀▀█ ▀█─█▀ 　 ▀▀█▀▀ █▀▀█ █▀▀█ █── █▀▀ ",
+            "█──█ ▄▀─ ─█▄█─ 　 ──█── █──█ █──█ █── ▀▀█ ",
+            "▀──▀ ▀▀▀ ──▀── 　 ──▀── ▀▀▀▀ ▀▀▀▀ ▀▀▀ ▀▀▀ ",
+        ]
+        for l in art:
+            print(Colorate.Horizontal(colors["head"], l.center(tw)))
         print()
 
     @staticmethod

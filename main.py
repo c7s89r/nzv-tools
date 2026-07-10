@@ -352,29 +352,7 @@ def run_app():
         
         PaginatedUI.draw_dashboard(current_page)
 
-        try:
-            import msvcrt
-            k = msvcrt.getch()
-            if k == b'\xe0':
-                k2 = msvcrt.getch()
-                if k2 == b'K':
-                    current_page = (current_page - 1) % len(PAGES)
-                    continue
-                elif k2 == b'M':
-                    current_page = (current_page + 1) % len(PAGES)
-                    continue
-                continue
-            buf = k.decode().strip()
-            if buf.isdigit():
-                import time as _t
-                while msvcrt.kbhit():
-                    n = msvcrt.getch().decode().strip()
-                    if n.isdigit():
-                        buf += n
-                    _t.sleep(0.05)
-            _c_raw = buf
-        except:
-            _c_raw = get_inpt().strip()
+        _c_raw = get_inpt().strip()
         _c = _c_raw.lower()
         
         if _c in ["a", "h"]:
