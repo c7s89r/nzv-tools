@@ -1,0 +1,10 @@
+{
+  "name": "NZV Tools",
+  "version": "3.0.0",
+  "author": "nzv",
+  "github": "https://github.com/c7s89r/nzv-tools",
+  "discord": "https://discord.gg/YOUR_INVITE",
+  "theme": "white",
+  "auto_open_discord": false,
+  "auto_update": true
+}
