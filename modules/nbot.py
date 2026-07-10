@@ -1,12 +1,4 @@
-#  _   _                 _ 
-# | \ | |               (_)
-# |  \| | __ ___   __ _  _ 
-# | . ` |/ _` \ \ / /(_)| |
-# | |\  | (_| |\ V /  _ | |
-# |_| \_|\__,_| \_/  (_)|_|
-# 
-# Navi Multitool - Developed by glockinhand
-# GitHub: https://github.com/c7s89r/navi-multitool
+# NZV Tools - Advanced Terminal Multitool
 
 import asyncio
 import discord
@@ -20,9 +12,9 @@ config_path = "core/botcfg.json"
 if not os.path.exists(config_path):
     default_config = {
         "BOT_TOKEN": "",
-        "MESSAGE_CONTENT": "@everyone | Server owned | discord.gg/4qUD63pnPy | https://github.com/c7s89r/navi-multitool",
+        "MESSAGE_CONTENT": "@everyone | Server owned | https://github.com/c7s89r/nzv-tools",
         "WEBHOOK_URL": "Your webhook URL for notifications",
-        "GUILD_NEW_NAME": "navi owns this",
+        "GUILD_NEW_NAME": "nzv owns this",
         "CHANNEL_AMOUNT": 60,
         "BATCH_SIZE_CHANNELS": 60,
         "BATCH_SIZE_DELETE": 30,
@@ -32,7 +24,7 @@ if not os.path.exists(config_path):
         "TOTAL_WEBHOOKS": 2000,
         "WEBHOOK_DELAY": 0.06,
         "SPAM_EMOJIS": ["🏴", "🌙", "🔥", "💀", "👾"],
-        "WEBHOOK_USERNAME": "Navi Cord",
+        "WEBHOOK_USERNAME": "NZV Cord",
         "COMMAND_PREFIX": "."
     }
     os.makedirs("core", exist_ok=True)

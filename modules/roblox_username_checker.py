@@ -178,14 +178,14 @@ def main():
     import sys
     if sys.platform == "win32":
         asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
-    cl = Theme.get_colors() # navi themes are just so goated
+    cl = Theme.get_colors() # nzv themes are just so goated
     while True:
         clr()
         print(Colorate.Horizontal(cl["head"], "  [ ROBLOX USERNAME CHECKER ]\n"))
         print(Colorate.Horizontal(cl["num"], "  [1] ") + Colorate.Horizontal(cl["txt"], "Generate Usernames"))
         print(Colorate.Horizontal(cl["num"], "  [2] ") + Colorate.Horizontal(cl["txt"], "Check Usernames"))
         print(Colorate.Horizontal(cl["num"], "  [3] ") + Colorate.Horizontal(cl["txt"], "Return"))
-        choice = get_inpt("navi@roblox_checker:~# ").strip()
+        choice = get_inpt("nzv@roblox_checker:~# ").strip()
         if choice == "1":
             print(Colorate.Horizontal(cl["num"], "  Which kind of usernames to generate? [5L, 5C, 4L, 4C, 3L, 3C]"))
             username_type = get_inpt("  > ").strip().upper()

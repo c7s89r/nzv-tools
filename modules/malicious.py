@@ -5,8 +5,8 @@
 # | |\  | (_| |\ V /  _ | |
 # |_| \_|\__,_| \_/  (_)|_|
 # 
-# Navi Multitool - Developed by glockinhand
-# GitHub: https://github.com/c7s89r/navi-multitool
+# NZV Tools - Terminal Multitool
+
 
 import requests, time, random, json, re, os, subprocess, concurrent.futures, socket, threading, sys
 from core.display import get_inpt, Colors, Colorate, Theme

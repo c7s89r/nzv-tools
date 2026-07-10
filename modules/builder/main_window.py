@@ -12,8 +12,8 @@ from .pages.info_page import InfoPage
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setWindowIcon(QIcon("modules/logos/navi_logo.png"))
-        self.setWindowTitle("NAVI")
+        self.setWindowIcon(QIcon("modules/logos/NZV_logo.png"))
+        self.setWindowTitle("NZV")
         self.setGeometry(100, 50, 1000, 700)
         self.setStyleSheet(MAIN_STYLE)
         
@@ -77,7 +77,7 @@ class MainWindow(QMainWindow):
         top_layout.setSpacing(10)
         
         logo = QLabel()
-        pixmap = QPixmap("modules/logos/navi_logo.png")
+        pixmap = QPixmap("modules/logos/NZV_logo.png")
         if not pixmap.isNull():
             logo.setPixmap(pixmap.scaled(24, 24, Qt.KeepAspectRatio, Qt.SmoothTransformation))
         else:
@@ -85,7 +85,7 @@ class MainWindow(QMainWindow):
             logo.setFont(QFont("Segoe UI", 16, QFont.Bold))
             logo.setStyleSheet("color: #00a2ff;")
         
-        title = QLabel("NAVI")
+        title = QLabel("NZV")
         title.setFont(QFont("Segoe UI", 11, QFont.Bold))
         title.setStyleSheet("color: #e0e0e0;")
         
@@ -163,7 +163,7 @@ class MainWindow(QMainWindow):
         side_layout.addWidget(self.btn_info)
         side_layout.addStretch()
         
-        footer = QLabel('<a href="https://github.com/c7s89r/navi-multitool" style="color: #888; text-decoration: none; font-size: 10px;">Navi Multitool</a>')
+        footer = QLabel('<a href="https://github.com/c7s89r/nzv-tools" style="color: #888; text-decoration: none; font-size: 10px;">NZV Tools</a>')
         footer.setOpenExternalLinks(True)
         footer.setAlignment(Qt.AlignCenter)
         side_layout.addWidget(footer)

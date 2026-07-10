@@ -61,8 +61,8 @@ def cfg_mgr():
         _pc(f"Active Theme: {active_theme}", _cl["head"])
         _p()
 
-        _tl = [("1","Blue"),("2","Red"),("3","Purple"),("4","Green"),("5","Yellow"),("6","Pink"),
-               ("7","Cyan"),("8","Gray"),("9","Rainbow"),("10","Modern"),("11","Modern Red"),("12","Modern Purple")]
+        _tl = [("0","White"),("1","Blue"),("2","Red"),("3","Purple"),("4","Green"),("5","Yellow"),
+               ("6","Pink"),("7","Cyan"),("8","Gray"),("9","Rainbow"),("10","Modern"),("11","Modern Red"),("12","Modern Purple")]
         col_w = inner // 3
         for _i in range(0, len(_tl), 3):
             _ln = ""
@@ -114,8 +114,8 @@ def cfg_mgr():
         print(mg + Colorate.Horizontal(_cl["head"], "└" + "─" * inner + "┘"))
 
         _c = get_inpt("nzv@config:~#")
-        if _c in [str(_x) for _x in range(1, 13)]:
-            _tm = {"1":"blue","2":"red","3":"purple","4":"green","5":"yellow","6":"pink","7":"cyan","8":"gray","9":"rainbow","10":"modern","11":"modern_red","12":"modern_purple"}[_c]
+        if _c in [str(_x) for _x in range(0, 13)]:
+            _tm = {"0":"white","1":"blue","2":"red","3":"purple","4":"green","5":"yellow","6":"pink","7":"cyan","8":"gray","9":"rainbow","10":"modern","11":"modern_red","12":"modern_purple"}[_c]
             try:
                 with open("core/config.json", "r") as _f: _d = json.load(_f)
                 _d["theme"] = _tm

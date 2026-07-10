@@ -14,7 +14,7 @@ class SplashScreen(QWidget):
         layout.setAlignment(Qt.AlignCenter)
         
         self.logo_label = QLabel()
-        pixmap = QPixmap("modules/logos/navi_logo.png")
+        pixmap = QPixmap("modules/logos/NZV_logo.png")
         if not pixmap.isNull():
             self.logo_label.setPixmap(pixmap.scaled(200, 200, Qt.KeepAspectRatio, Qt.SmoothTransformation))
         else:
@@ -25,7 +25,7 @@ class SplashScreen(QWidget):
         self.logo_label.setAlignment(Qt.AlignCenter)
         layout.addWidget(self.logo_label, alignment=Qt.AlignCenter)
         
-        self.name = QLabel("NAVI")
+        self.name = QLabel("NZV")
         self.name.setAlignment(Qt.AlignCenter)
         self.name.setFont(QFont("Segoe UI", 24, QFont.Bold))
         self.name.setStyleSheet("color: #00a2ff; margin-top: 20px;")

@@ -1,12 +1,4 @@
-#  _   _                 _ 
-# | \ | |               (_)
-# |  \| | __ ___   __ _  _ 
-# | . ` |/ _` \ \ / /(_)| |
-# | |\  | (_| |\ V /  _ | |
-# |_| \_|\__,_| \_/  (_)|_|
-#
-# Navi Multitool - Developed by glockinhand
-# GitHub: https://github.com/c7s89r/navi-multitool
+# NZV Tools - Terminal Multitool
 
 import os, time, sys, re
 from pystyle import Center

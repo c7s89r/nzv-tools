@@ -5,8 +5,8 @@
 # | |\  | (_| |\ V /  _ | |
 # |_| \_|\__,_| \_/  (_)|_|
 # 
-# Navi Multitool - Developed by glockinhand
-# GitHub: https://github.com/c7s89r/navi-multitool
+# NZV Tools - Terminal Multitool
+
 
 import requests, os, time, random, socket, webbrowser, sys
 from core.display import Theme, Colorate, get_inpt, menu_opts
@@ -238,7 +238,7 @@ def dox_tracker():
     print(Colorate.Horizontal(cl["head"], "  [ DOX TRACKER ]\n"))
     while 1:
         menu_opts({"1": "Username Checker", "2": "Name Search", "99": "Go Back"})
-        t = get_inpt("navi@dox:~#")
+        t = get_inpt("nzv@dox:~#")
         if t == '99': break
         if t == '1':
             u = get_inpt("username:")

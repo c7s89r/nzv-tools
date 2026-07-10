@@ -5,8 +5,8 @@
 # | |\  | (_| |\ V /  _ | |
 # |_| \_|\__,_| \_/  (_)|_|
 # 
-# Navi Multitool - Developed by glockinhand
-# GitHub: https://github.com/c7s89r/navi-multitool
+# NZV Tools - Terminal Multitool
+
 
 import json, os, re, random, threading, time
 import requests, websocket
@@ -19,7 +19,7 @@ os.makedirs(_LOGDIR, exist_ok=True)
 os.makedirs("core",  exist_ok=True)
 
 
-class NaviSelfbot:
+class NZVSeltbot:
     def __init__(self, token):
         self.token   = token
         self.headers = {
@@ -475,7 +475,7 @@ def selfbot_menu():
     cl = Theme.get_colors()
     print_banner()
     tk = get_inpt("Token:")
-    bot = NaviSelfbot(tk)
+    bot = NZVSeltbot(tk)
     if not bot.fetch_user():
         print(Colorate.Horizontal(cl["num"], "  [!] Invalid Token."))
         time.sleep(2)
@@ -487,7 +487,7 @@ def selfbot_menu():
     while True:
         cl = Theme.get_colors()
         _draw_menu(cl, bot)
-        c = get_inpt("navi@selfbot:~#")
+        c = get_inpt("nzv@selfbot:~#")
 
         if c == "1":
             bot.nitro_sniper = not bot.nitro_sniper

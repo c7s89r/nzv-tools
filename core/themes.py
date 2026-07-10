@@ -4,7 +4,7 @@ THEMES = {
     "white": {
         "banner": Colors.white,
         "head": Colors.white,
-        "num": Colors.white,
+        "num": Colors.white_to_black,
         "txt": Colors.white,
         "sub": Colors.white,
         "inp": Colors.white

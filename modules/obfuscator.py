@@ -5,8 +5,8 @@
 # | |\  | (_| |\ V /  _ | |
 # |_| \_|\__,_| \_/  (_)|_|
 # 
-# Navi Multitool - Developed by glockinhand
-# GitHub: https://github.com/c7s89r/navi-multitool
+# NZV Tools - Terminal Multitool
+
 
 import zlib, base64, marshal, time, os, tkinter as tk; from tkinter import filedialog; from core.display import Theme, Colorate, get_inpt, print_banner
 
@@ -27,7 +27,7 @@ def _0x3(c):
     
     _l = "m=__import__('marshal');z=__import__('zlib');b=__import__('base64');"
     _e = "exec(m.loads(z.decompress(b.b64decode(''.join([chr(ord(i)^0x7) for i in bytes.fromhex('"+_h+"').decode()[::-1]])))))"
-    return "'''\n~ OBFUSCATED BY NAVI ~\n'''\n" + _l + _e
+    return "'''\n~ OBFUSCATED BY NZV ~\n'''\n" + _l + _e
 
 def obfuscator_init():
     _cl = Theme.get_colors(); print_banner(); print(Colorate.Horizontal(_cl["head"], "  [ PYTHON OBFUSCATOR ]\n"))

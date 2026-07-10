@@ -1,12 +1,4 @@
-#  _   _                 _ 
-# | \ | |               (_)
-# |  \| | __ ___   __ _  _ 
-# | . ` |/ _` \ \ / /(_)| |
-# | |\  | (_| |\ V /  _ | |
-# |_| \_|\__,_| \_/  (_)|_|
-# 
-# Navi Multitool - Developed by glockinhand
-# GitHub: https://github.com/c7s89r/navi-multitool
+# NZV Tools - Terminal Multitool
 
 import os
 import sys
@@ -93,7 +85,7 @@ def init_os():
     except:
         print("error")
         pass
-    System.Title(f"*Navi @ {user} ~ v{ver}")
+    System.Title(f"*NZV Tools @ {user} ~ v{ver}")
     cols, rows = shutil.get_terminal_size()
     if cols < 80:
         cl = Theme.get_colors()
@@ -186,9 +178,9 @@ def boot_anim():
     print("\n")
     user = os.environ.get('USERNAME', 'Unkown') if os.name == 'nt' else os.environ.get('USER', 'Unkown')
     seq = [
-        f"Booting Copeland OS [ Node: {user} ]...", 
-        "Connecting to the Wired...", 
-        "Initalizing Navi protocol..."
+        f"Booting NZV OS [ Node: {user} ]...", 
+        "Establishing secure channels...", 
+        "Initializing NZV protocol..."
     ]
     for s in seq:
         type_print(s, 0.02)
@@ -298,10 +290,10 @@ def menu_opts(options):
 
 def get_inpt(prompt=None):
     if prompt is None:
-        prompt = f"{user}@navi:~#"
+        prompt = f"{user}@nzv:~#"
     else:
-        prompt = prompt.replace("navi@root/", f"{user}@navi/")
-        prompt = prompt.replace("navi@", f"{user}@navi/")
+        prompt = prompt.replace("nzv@root/", f"{user}@nzv/")
+        prompt = prompt.replace("nzv@", f"{user}@nzv/")
         
     cl = Theme.get_colors()
     _prmpt = f"\n  {prompt} "

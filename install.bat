@@ -1,10 +1,10 @@
 @echo off
 chcp 65001 >nul
-title Navi Multitool - Installer
-color 0b
+title NZV Tools - Installer
+color 0f
 
 echo ======================================================
-echo           NAVI MULTITOOL INSTALLER
+echo           NZV TOOLS INSTALLER
 echo ======================================================
 echo.
 

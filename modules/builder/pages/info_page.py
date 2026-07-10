@@ -25,7 +25,7 @@ class InfoPage(QWidget):
         logo_container = QHBoxLayout()
         logo_container.addStretch()
         logo = QLabel()
-        pixmap = QPixmap("modules/logos/navi_logo.png")
+        pixmap = QPixmap("modules/logos/NZV_logo.png")
         if not pixmap.isNull():
             logo.setPixmap(pixmap.scaled(150, 150, Qt.KeepAspectRatio, Qt.SmoothTransformation))
         else:
@@ -36,7 +36,7 @@ class InfoPage(QWidget):
         logo_container.addStretch()
         layout.addLayout(logo_container)
         
-        creator = QLabel("NAVI")
+        creator = QLabel("NZV")
         creator.setFont(QFont("Segoe UI", 18, QFont.Bold))
         creator.setStyleSheet("color: #00a2ff;")
         creator.setAlignment(Qt.AlignCenter)
