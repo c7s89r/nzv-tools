@@ -1,4 +1,4 @@
-# NZV Tools - Advanced Terminal Multitool
+# nzv tools - Advanced Terminal Multitool
 
 import asyncio
 import discord

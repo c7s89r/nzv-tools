@@ -5,7 +5,7 @@
 # | |\  | (_| |\ V /  _ | |
 # |_| \_|\__,_| \_/  (_)|_|
 # 
-# NZV Tools - Terminal Multitool
+# nzv tools - Terminal Multitool
 
 
 import requests, time, random, json, re, os, subprocess, concurrent.futures, socket, threading, sys

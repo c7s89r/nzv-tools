@@ -5,7 +5,7 @@
 # | |\  | (_| |\ V /  _ | |
 # |_| \_|\__,_| \_/  (_)|_|
 # 
-# NZV Tools - Terminal Multitool
+# nzv tools - Terminal Multitool
 
 
 import os, sys, time, json, hashlib, re, zlib, base64, stat, struct

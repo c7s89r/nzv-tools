@@ -5,7 +5,7 @@
 # | |\  | (_| |\ V /  _ | |
 # |_| \_|\__,_| \_/  (_)|_|
 # 
-# NZV Tools - Terminal Multitool
+# nzv tools - Terminal Multitool
 
 
 import time, urllib.request, urllib.error, urllib.parse, json, requests, random, string, threading, webbrowser, os, concurrent.futures
@@ -25,7 +25,7 @@ def _snd(url, d, m='POST'):
 def webhook_spam(url, msg, amt=10):
     cl = Theme.get_colors()
     print("\n  [+] Initializing spam...") 
-    sc, p = 0, {"content": msg, "username": "NZV Tools", "avatar_url": "https://i.postimg.cc/fkjm0zBc/k.jpg"}
+    sc, p = 0, {"content": msg, "username": "nzv tools", "avatar_url": "https://i.postimg.cc/fkjm0zBc/k.jpg"}
     for i in range(amt):
         st = _snd(url, p)
         if st in [200, 204]:
@@ -560,7 +560,7 @@ def discord_username_checker():
                         ],
                         "thumbnail": {"url": "https://i.postimg.cc/fkjm0zBc/k.jpg"},
                         "footer": {
-                            "text": "NZV Tools • https://github.com/c7s89r/nzv-tools",
+                            "text": "nzv tools • https://github.com/c7s89r/nzv-tools",
                             "icon_url": "https://i.postimg.cc/fkjm0zBc/k.jpg"
                         },
                     }]

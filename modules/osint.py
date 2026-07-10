@@ -5,7 +5,7 @@
 # | |\  | (_| |\ V /  _ | |
 # |_| \_|\__,_| \_/  (_)|_|
 # 
-# NZV Tools - Terminal Multitool
+# nzv tools - Terminal Multitool
 
 
 import requests, socket, webbrowser, concurrent.futures, time

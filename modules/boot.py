@@ -5,7 +5,7 @@
 # | |\  | (_| |\ V /  _ | |
 # |_| \_|\__,_| \_/  (_)|_|
 # 
-# NZV Tools - Terminal Multitool
+# nzv tools - Terminal Multitool
 
 
 import socket, threading, random, os, time, sys

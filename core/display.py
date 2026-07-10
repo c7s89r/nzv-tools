@@ -1,4 +1,4 @@
-# NZV Tools - Terminal Multitool
+# nzv tools - Terminal Multitool
 
 import os
 import sys

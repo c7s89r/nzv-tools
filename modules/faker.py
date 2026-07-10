@@ -5,7 +5,7 @@
 # | |\  | (_| |\ V /  _ | |
 # |_| \_|\__,_| \_/  (_)|_|
 # 
-# NZV Tools - Terminal Multitool
+# nzv tools - Terminal Multitool
 
 
 import time, random, string, threading, os, base64, re, requests, json
@@ -71,7 +71,7 @@ critic draw oak hood reward bunker next old spy about clown notice
 
 -------------------------------
 [!] Keep in mind that this is a larp. You are not able to move the funds.
-[!] NZV Tools - Faker mode
+[!] nzv tools - Faker mode
 """
     
     path = "output/exodus_seed.txt"
@@ -419,7 +419,7 @@ def fake_bruteforcer():
     print("\n" + "─" * 60)
     print(Colorate.Horizontal(cl["head"], f"  [!] BRUTEFORCE STATUS: {Colorate.Horizontal(cl['txt'], 'IN PROGRESS...')}"))
     print(Colorate.Horizontal(cl["head"], f"  [!] NOTICE: {Colorate.Horizontal(cl['txt'], 'Bruteforcing passwords this will take time, but the engine is bypasssing 2FA and Rate-limits.')}"))
-    print(Colorate.Horizontal(cl["head"], f"  [!] INFO: {Colorate.Horizontal(cl['txt'], 'NZV Tools - Simulation Engine.')}"))
+    print(Colorate.Horizontal(cl["head"], f"  [!] INFO: {Colorate.Horizontal(cl['txt'], 'nzv tools - Simulation Engine.')}"))
     print("─" * 60)
     
     input(Colorate.Horizontal(cl["head"], "\n  Press Enter..."))

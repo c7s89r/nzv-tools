@@ -1,4 +1,4 @@
-# NZV Tools
+# nzv tools
 
 Advanced terminal multitool.
 

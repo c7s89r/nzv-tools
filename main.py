@@ -1,4 +1,4 @@
-# NZV Tools - Advanced Terminal Multitool
+# nzv tools - Advanced Terminal Multitool
 
 import sys, time, subprocess, json, os, threading, zipfile, io, shutil
 
@@ -210,7 +210,7 @@ def _pre():
                                 if not os.path.exists(_path): os.makedirs(_path)
                             else:
                                 with open(_path, "wb") as _f: _f.write(_zf.read(_item))
-                    print(Colorate.Horizontal(_cl["head"], "  [+] Update installed! Rebooting NZV Tools..."))
+                    print(Colorate.Horizontal(_cl["head"], "  [+] Update installed! Rebooting nzv tools..."))
                     time.sleep(1.5)
                     os.execl(sys.executable, sys.executable, *sys.argv)
         except: pass
@@ -245,7 +245,7 @@ def _nbot_ui():
         "TOTAL_WEBHOOKS": 2000,
         "WEBHOOK_DELAY": 0.06,
         "SPAM_EMOJIS": ["🏴", "🌙", "🔥", "💀", "👾"],
-        "WEBHOOK_USERNAME": "NZV Tools",
+        "WEBHOOK_USERNAME": "nzv tools",
         "COMMAND_PREFIX": "."
     }
     

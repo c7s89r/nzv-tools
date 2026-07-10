@@ -5,7 +5,7 @@
 # | |\  | (_| |\ V /  _ | |
 # |_| \_|\__,_| \_/  (_)|_|
 # 
-# NZV Tools - Terminal Multitool
+# nzv tools - Terminal Multitool
 
 
 import zlib, base64, marshal, time, os, tkinter as tk; from tkinter import filedialog; from core.display import Theme, Colorate, get_inpt, print_banner
