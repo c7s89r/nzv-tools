@@ -555,6 +555,9 @@ def run_app():
         elif _c == "65":
             from modules.proxychecker import proxy_checker_menu
             proxy_checker_menu()
+        elif _c == "70":
+            from modules.guns import guns_views_bot
+            guns_views_bot()
         elif _c == "99": sys.exit(0)
 
 if __name__ == '__main__':
