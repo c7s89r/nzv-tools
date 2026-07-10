@@ -100,41 +100,24 @@ def type_print(text, delay=0.03):
     sys.stdout.write("\n")
 
 def boot_anim():
-    banner = r"""
-    ╔══════════════════════════════════════════════╗
-    ║                                                  ║
-    ║     ███╗   ██╗███████╗██╗   ██╗                ║
-    ║     ████╗  ██║╚══███╔╝██║   ██║                ║
-    ║     ██╔██╗ ██║  ███╔╝ ██║   ██║                ║
-    ║     ██║╚██╗██║ ███╔╝  ╚██╗ ██╔╝                ║
-    ║     ██║ ╚████║███████╗ ╚████╔╝                 ║
-    ║     ╚═╝  ╚═══╝╚══════╝  ╚═══╝                  ║
-    ║                                                  ║
-    ║              T E R M I N A L                     ║
-    ║              M U L T I T O O L                   ║
-    ║                                                  ║
-    ╚══════════════════════════════════════════════╝
-    """
     cols = Theme.get_colors()
     clr()
     tw = shutil.get_terminal_size().columns
-    for line in banner.split('\n'):
-        if line.strip():
-            print(Colorate.Horizontal(cols["banner"], line.center(tw)))
-        else:
-            print()
-        time.sleep(0.03)
-    
-    print("\n")
-    user = os.environ.get('USERNAME', 'Unknown') if os.name == 'nt' else os.environ.get('USER', 'Unknown')
-    seq = [
-        f"Initializing NZV kernel [ node: {user} ]...",
-        "Loading core modules...",
-        "Establishing encrypted channels...",
-        "System ready."
+    lines = [
+        "  ███╗   ██╗███████╗██╗   ██╗",
+        "  ████╗  ██║╚══███╔╝██║   ██║",
+        "  ██╔██╗ ██║  ███╔╝ ██║   ██║",
+        "  ██║╚██╗██║ ███╔╝  ╚██╗ ██╔╝",
+        "  ██║ ╚████║███████╗ ╚████╔╝",
+        "  ╚═╝  ╚═══╝╚══════╝  ╚═══╝",
     ]
-    for s in seq:
-        type_print(s, 0.02)
+    for l in lines:
+        print(Colorate.Horizontal(cols["banner"], l.center(tw)))
+        time.sleep(0.05)
+    print()
+    user = os.environ.get('USERNAME', 'Unknown') if os.name == 'nt' else os.environ.get('USER', 'Unknown')
+    for s in [f"booting [ node: {user} ]", "loading modules", "ready"]:
+        print(Colorate.Horizontal(cols["txt"], f"  {s}"))
         time.sleep(0.15)
     time.sleep(0.3)
 
@@ -177,16 +160,16 @@ def print_banner():
     clr()
     cols = Theme.get_colors()
     tw = shutil.get_terminal_size().columns
-    banner = r"""
-    ███╗   ██╗███████╗██╗   ██╗
-    ████╗  ██║╚══███╔╝██║   ██║
-    ██╔██╗ ██║  ███╔╝ ██║   ██║
-    ██║╚██╗██║ ███╔╝  ╚██╗ ██╔╝
-    ██║ ╚████║███████╗ ╚████╔╝ 
-    ╚═╝  ╚═══╝╚══════╝  ╚═══╝  
-    """
-    print(Colorate.Horizontal(cols["banner"], banner.center(tw)))
-    print(Colorate.Horizontal(cols["sub"], "─" * 50))
+    lines = [
+        "  ███╗   ██╗███████╗██╗   ██╗",
+        "  ████╗  ██║╚══███╔╝██║   ██║",
+        "  ██╔██╗ ██║  ███╔╝ ██║   ██║",
+        "  ██║╚██╗██║ ███╔╝  ╚██╗ ██╔╝",
+        "  ██║ ╚████║███████╗ ╚████╔╝",
+        "  ╚═╝  ╚═══╝╚══════╝  ╚═══╝",
+    ]
+    for l in lines:
+        print(Colorate.Horizontal(cols["banner"], l.center(tw)))
     print()
 
 def menu_opts(options):
@@ -202,12 +185,6 @@ def menu_opts(options):
     print()
 
 def get_inpt(prompt=None):
-    if prompt is None:
-        prompt = f"{user}@nzv:~#"
-    else:
-        prompt = prompt.replace("nzv@root/", f"{user}@nzv/")
-        prompt = prompt.replace("nzv@", f"{user}@nzv/")
-        
+    p = f"{user}@nzv:~# " if prompt is None else prompt
     cl = Theme.get_colors()
-    _prmpt = f"\n  {prompt} "
-    return input(Colorate.Horizontal(cl["inp"], _prmpt))
+    return input(Colorate.Horizontal(cl["inp"], f"\n  {p}"))

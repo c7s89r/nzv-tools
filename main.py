@@ -344,8 +344,7 @@ def run_app():
         
         PaginatedUI.draw_dashboard(current_page)
         
-        p_name = PAGES[current_page]['title'].split()[0].lower()
-        _c_raw = get_inpt(f"nzv@root/{p_name}:~#").strip()
+        _c_raw = get_inpt().strip()
         _c = _c_raw.lower()
         
         if _c in ["a", "p"]:
@@ -354,7 +353,7 @@ def run_app():
         elif _c in ["d", "n"]:
             current_page = (current_page + 1) % len(PAGES)
             continue
-        elif _c.startswith("p") and len(_c) == 2 and _c[1] in ["1", "2", "3", "4", "5", "6"]:
+        elif _c.startswith("p") and len(_c) == 2 and _c[1] in ["1", "2", "3", "4", "5", "6", "7"]:
             current_page = int(_c[1]) - 1
             continue
         elif not _c:
@@ -365,7 +364,7 @@ def run_app():
             while 1:
                 print_banner()
                 PaginatedUI.draw_card_box("WEBHOOK OPERATIONS", {"1": "Spammer", "2": "Deleter", "99": "Return"})
-                _cc = get_inpt("nzv@discord/webhooks:~#")
+                _cc = get_inpt()
                 if _cc == "1": webhook_spam(get_inpt("url:"), get_inpt("msg:"), int(get_inpt("amt (10):") or 10))
                 elif _cc == "2": webhook_delete(get_inpt("url:"))
                 elif _cc == "99": break
@@ -373,7 +372,7 @@ def run_app():
             while 1:
                 print_banner()
                 PaginatedUI.draw_card_box("TOKEN & ACCOUNT TOOLS", {"1": "Token Bruteforce", "2": "Token Info", "3": "Token Nuker", "4": "Token Login", "5": "Status Rotator", "6": "Token Onliner", "7": "Selfbot", "8": "Report Bot", "9": "Server Cloner", "99": "Return"})
-                _cc = get_inpt("nzv@discord/tokens:~#")
+                _cc = get_inpt()
                 if _cc == "1":
                     id_to_token()
 
@@ -529,7 +528,7 @@ def run_app():
                     "13": "Hacker Terminal", "14": "Ransomware Sim", "15": "Fake Bruteforcer",
                     "16": "QR Code Gen", "17": "Explanation", "99": "Return"
                 })
-                _cc = get_inpt("nzv@faker:~#")
+                _cc = get_inpt()
                 if _cc == "1": from modules.faker import fake_token_gen; fake_token_gen()
                 elif _cc == "2": from modules.faker import fake_mail_gen; fake_mail_gen()
                 elif _cc == "3": from modules.faker import fake_identity_gen; fake_identity_gen()
