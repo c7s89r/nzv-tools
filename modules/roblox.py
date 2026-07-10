@@ -297,7 +297,7 @@ def roblox_cookie_info():
                     "color": 3447003,
                     "thumbnail": {"url": avatar_url if avatar_url != "N/A" else ""},
                     "fields": fields,
-                    "footer": {"text": "Navi Multitool | https://github.com/c7s89r"}
+                    "footer": {"text": "NZV Tools | https://github.com/c7s89r"}
                 }]
             }
             try:

@@ -11,36 +11,17 @@ class ModernUI:
         _clr()
         _c = _thm.get_colors()
         _b = [
-            r" _   _               _ ",
-            r"| \ | |             (_)",
-            r"|  \| |  __ _ __   __ _ ",
-            r"| . ` | / _` |\ \ / /| |",
-            r"| |\  || (_| | \ V / | |",
-            r"|_| \_| \__,_|  \_/  |_|"
+            r"    ███╗   ██╗███████╗██╗   ██╗",
+            r"    ████╗  ██║╚══███╔╝██║   ██║",
+            r"    ██╔██╗ ██║  ███╔╝ ██║   ██║",
+            r"    ██║╚██╗██║ ███╔╝  ╚██╗ ██╔╝",
+            r"    ██║ ╚████║███████╗ ╚████╔╝ ",
+            r"    ╚═╝  ╚═══╝╚══════╝  ╚═══╝  ",
         ]
         
-        import shutil
-        _tw = shutil.get_terminal_size().columns
-        
-        print("\n\n")
-        for i, line in enumerate(_b):
-            if i == 5:
-                _left = "~ present day "
-                _right = "present time ~"
-                _pad = 5
-                
-                _total_w = len(_left) + _pad + len(line) + _pad + len(_right)
-                _start_p = (_tw - _total_w) // 2
-                
-                _res = " " * _start_p
-                _res += _col.Horizontal(_c["num"], _left)
-                _res += " " * _pad
-                _res += _col.Horizontal(_c["banner"], line)
-                _res += " " * _pad
-                _res += _col.Horizontal(_c["num"], _right)
-                print(_res)
-            else:
-                print(_col.Horizontal(_c["banner"], Center.XCenter(line)))
+        print("\n")
+        for line in _b:
+            print(_col.Horizontal(_c["banner"], Center.XCenter(line)))
         print("\n")
 
 

