@@ -111,7 +111,7 @@ class PaginatedUI:
         cls.draw_tab_bar(colors, page)
         cls.draw_page(colors, page)
         tw = shutil.get_terminal_size().columns
-        nav = "a/p prev | d/n next | 99 exit"
+        nav = "<- / a prev | -> / d next | 99 exit"
         print(Colorate.Horizontal(colors["txt"], nav.center(tw)))
         print()
 

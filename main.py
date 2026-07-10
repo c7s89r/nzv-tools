@@ -351,14 +351,28 @@ def run_app():
         _cfg = get_config()
         
         PaginatedUI.draw_dashboard(current_page)
-        
-        _c_raw = get_inpt().strip()
+
+        try:
+            import msvcrt
+            k = msvcrt.getch()
+            if k == b'\xe0':
+                k2 = msvcrt.getch()
+                if k2 == b'K':
+                    current_page = (current_page - 1) % len(PAGES)
+                    continue
+                elif k2 == b'M':
+                    current_page = (current_page + 1) % len(PAGES)
+                    continue
+                continue
+            _c_raw = k.decode().strip()
+        except:
+            _c_raw = get_inpt().strip()
         _c = _c_raw.lower()
         
-        if _c in ["a", "p"]:
+        if _c in ["a", "h"]:
             current_page = (current_page - 1) % len(PAGES)
             continue
-        elif _c in ["d", "n"]:
+        elif _c in ["d", "l"]:
             current_page = (current_page + 1) % len(PAGES)
             continue
         if not _c:
