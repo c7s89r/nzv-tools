@@ -1,102 +1,49 @@
 import os
 import shutil
-from core.display import Theme, Colorate, Colors, clr, get_config
+import time
+try:
+    import psutil
+except ImportError:
+    psutil = None
 
-PAGES = [
-    {
-        "title": "discord",
-        "tools": [
-            ("1", "webhook tools"),
-            ("2", "token tools"),
-            ("3", "nitro generator"),
-            ("4", "server info"),
-            ("5", "bot invite gen"),
-            ("6", "selfbot"),
-            ("7", "server cloner"),
-            ("8", "nuke bot"),
-            ("9", "username checker"),
-        ]
-    },
-    {
-        "title": "osint",
-        "tools": [
-            ("10", "port scanner"),
-            ("11", "whois lookup"),
-            ("12", "dns lookup"),
-            ("13", "metadata scan"),
-            ("14", "dox tracker"),
-            ("15", "dox creator"),
-            ("16", "phone lookup"),
-            ("17", "email lookup"),
-        ]
-    },
-    {
-        "title": "malicious",
-        "tools": [
-            ("20", "email bomber"),
-            ("21", "crypto clipper"),
-            ("22", "vuln scanner"),
-            ("23", "ddos attack"),
-            ("24", "stealer builder"),
-            ("25", "keylogger builder"),
-            ("26", "ip grabber"),
-            ("27", "rat builder"),
-            ("28", "wallet bruteforce"),
-        ]
-    },
-    {
-        "title": "roblox",
-        "tools": [
-            ("40", "user info"),
-            ("41", "cookie info"),
-            ("42", "cookie login"),
-            ("43", "group info"),
-            ("44", "asset dl"),
-            ("45", "name history"),
-            ("46", "username checker"),
-            ("47", "cookie refresher"),
-        ]
-    },
-    {
-        "title": "faker",
-        "tools": [
-            ("50", "faker tools"),
-            ("34", "web cloner"),
-            ("35", "qr code gen"),
-        ]
-    },
-    {
-        "title": "system",
-        "tools": [
-            ("30", "base64 codec"),
-            ("31", "system info"),
-            ("32", "ip pinger"),
-            ("33", "obfuscator"),
-            ("60", "app info"),
-            ("61", "app config"),
-            ("64", "proxy scraper"),
-            ("65", "proxy checker"),
-        ]
-    },
-    {
-        "title": "web",
-        "tools": [
-            ("70", "guns.lol views"),
-            ("99", "exit"),
-        ]
-    },
+from core.display import Theme, Colorate, clr
+
+CATEGORIES = [
+    ("discord", [
+        ("1", "webhook tools"), ("2", "token tools"), ("3", "nitro generator"),
+        ("4", "server info"), ("5", "bot invite gen"), ("6", "selfbot"),
+        ("7", "server cloner"), ("8", "nuke bot"), ("9", "username checker"),
+    ]),
+    ("osint", [
+        ("10", "port scanner"), ("11", "whois lookup"), ("12", "dns lookup"),
+        ("13", "metadata scan"), ("14", "dox tracker"), ("15", "dox creator"),
+        ("16", "phone lookup"), ("17", "email lookup"),
+    ]),
+    ("malicious", [
+        ("20", "email bomber"), ("21", "crypto clipper"), ("22", "vuln scanner"),
+        ("23", "ddos attack"), ("24", "stealer builder"), ("25", "keylogger builder"),
+        ("26", "ip grabber"), ("27", "rat builder"), ("28", "wallet bruteforce"),
+    ]),
+    ("roblox", [
+        ("40", "user info"), ("41", "cookie info"), ("42", "cookie login"),
+        ("43", "group info"), ("44", "asset dl"), ("45", "name history"),
+        ("46", "username checker"), ("47", "cookie refresher"),
+    ]),
+    ("faker", [
+        ("50", "faker tools"),
+    ]),
+    ("system", [
+        ("30", "base64 codec"), ("31", "system info"), ("32", "ip pinger"),
+        ("33", "obfuscator"), ("34", "web cloner"), ("35", "qr code gen"),
+        ("60", "app info"), ("61", "app config"), ("64", "proxy scraper"),
+        ("65", "proxy checker"),
+    ]),
+    ("web", [
+        ("70", "guns.lol views"),
+    ]),
 ]
 
-
 class PaginatedUI:
-    @staticmethod
-    def get_layout_width():
-        return min(80, shutil.get_terminal_size().columns - 4)
-
-    @staticmethod
-    def get_margin(box_w):
-        return " " * max(0, (shutil.get_terminal_size().columns - box_w) // 2)
-
     @staticmethod
     def draw_logo(colors):
         tw = shutil.get_terminal_size().columns
@@ -119,63 +66,62 @@ class PaginatedUI:
         ]
         for l in fox:
             print(Colorate.Horizontal(colors["banner"], l.center(tw)))
-        print(Colorate.Horizontal(colors["sub"], "nzv tools".center(tw)))
+
+        stats = ""
+        if psutil:
+            try:
+                cpu = psutil.cpu_percent()
+                ram = psutil.virtual_memory().percent
+                stats = f"  cpu: {cpu:.0f}%  ram: {ram:.0f}%"
+            except:
+                pass
+        if stats:
+            print(Colorate.Horizontal(colors["txt"], stats.rjust(tw)))
         print()
 
     @staticmethod
-    def draw_menu(active_idx, colors, box_w, margin):
-        page = PAGES[active_idx]
-        inner = box_w - 2
+    def draw_all_tools(colors):
+        tw = shutil.get_terminal_size().columns
+        box_w = min(90, tw - 4)
+        margin = " " * max(0, (tw - box_w) // 2)
 
-        print(margin + Colorate.Horizontal(colors["head"], f"  {page['title']}"))
-        print(margin + Colorate.Horizontal(colors["num"], "  " + "─" * (inner - 2)))
+        for cat_name, tools in CATEGORIES:
+            print(margin + Colorate.Horizontal(colors["head"], f"  {cat_name}"))
+            col_w = (box_w - 2) // 3
+            for i in range(0, len(tools), 3):
+                line = ""
+                for j in range(3):
+                    if i + j < len(tools):
+                        k, n = tools[i + j]
+                        entry = f"  {k.zfill(2)}  {n}"
+                        line += entry + " " * max(1, col_w - len(entry))
+                    else:
+                        line += " " * col_w
+                print(margin + Colorate.Horizontal(colors["txt"], line))
+            print()
 
-        tools = page["tools"]
-        for i in range(0, len(tools), 2):
-            left = tools[i]
-            right = tools[i + 1] if i + 1 < len(tools) else None
-            lk = str(left[0]).zfill(2)
-            ln = left[1]
-            line = f"  {lk}  {ln}"
-            pad = (inner // 2) - len(f"  {lk}  {ln}")
-            if pad > 0:
-                line += " " * pad
-            if right:
-                rk = str(right[0]).zfill(2)
-                rn = right[1]
-                line += f"  {rk}  {rn}"
-            print(margin + Colorate.Horizontal(colors["txt"], line))
-
-        print(margin + Colorate.Horizontal(colors["num"], "  " + "─" * (inner - 2)))
-
-    @staticmethod
-    def draw_footer(colors, box_w, margin):
-        print(margin + Colorate.Horizontal(colors["txt"], f"  n next  p prev  60 info  61 config  99 exit"))
+        print(margin + Colorate.Horizontal(colors["txt"], "  60  app info    61  config    99  exit"))
+        print(margin + Colorate.Horizontal(colors["num"], "  " + "─" * (box_w - 2)))
 
     @classmethod
-    def draw_dashboard(cls, active_idx):
+    def draw_dashboard(cls):
         clr()
         colors = Theme.get_colors()
-        box_w = cls.get_layout_width()
-        margin = cls.get_margin(box_w)
         cls.draw_logo(colors)
-        cls.draw_menu(active_idx, colors, box_w, margin)
-        print()
-        cls.draw_footer(colors, box_w, margin)
+        cls.draw_all_tools(colors)
 
     @staticmethod
     def draw_card_box(title, items):
         colors = Theme.get_colors()
         tw = shutil.get_terminal_size().columns
         box_w = max(50, min(80, tw - 6))
-        inner = box_w - 2
         margin = " " * max(0, (tw - box_w) // 2)
 
         print(margin + Colorate.Horizontal(colors["head"], f"  {title}"))
-        print(margin + Colorate.Horizontal(colors["num"], "  " + "─" * (inner - 2)))
+        print(margin + Colorate.Horizontal(colors["num"], "  " + "─" * (box_w - 4)))
 
         list_items = list(items.items())
-        col_w = inner // 2
+        col_w = box_w // 2
         for i in range(0, len(list_items), 2):
             k1, v1 = list_items[i]
             k2, v2 = list_items[i + 1] if i + 1 < len(list_items) else ("", "")
@@ -183,4 +129,4 @@ class PaginatedUI:
             c2 = f"  {k2}  {v2:<{col_w - 5}}" if k2 else ""
             print(margin + Colorate.Horizontal(colors["txt"], c1 + c2))
 
-        print(margin + Colorate.Horizontal(colors["num"], "  " + "─" * (inner - 2)))
+        print(margin + Colorate.Horizontal(colors["num"], "  " + "─" * (box_w - 4)))

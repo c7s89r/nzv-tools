@@ -85,7 +85,7 @@ def init_os():
     except:
         print("error")
         pass
-    System.Title(f"*NZV Tools @ {user} ~ v{ver}")
+    System.Title(f"nzv tools v{ver}")
     cols, rows = shutil.get_terminal_size()
     if cols < 80:
         cl = Theme.get_colors()
@@ -124,8 +124,7 @@ def boot_anim():
         print(Colorate.Horizontal(cols["banner"], l.center(tw)))
         time.sleep(0.02)
     print()
-    user = os.environ.get('USERNAME', 'Unknown') if os.name == 'nt' else os.environ.get('USER', 'Unknown')
-    for s in [f"booting [ node: {user} ]", "loading modules", "ready"]:
+    for s in ["booting [ node: user ]", "loading modules", "ready"]:
         print(Colorate.Horizontal(cols["txt"], f"  {s}"))
         time.sleep(0.15)
     time.sleep(0.3)
@@ -203,6 +202,6 @@ def menu_opts(options):
     print()
 
 def get_inpt(prompt=None):
-    p = f"{user}@nzv:~# " if prompt is None else prompt
+    p = "user@nzv:~# " if prompt is None else prompt
     cl = Theme.get_colors()
     return input(Colorate.Horizontal(cl["inp"], f"\n  {p}"))
