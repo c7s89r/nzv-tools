@@ -1,9 +1,17 @@
-import os, requests, random, threading, time
+import os, requests, random, threading, time, shutil
 from core.display import Colors, Colorate, get_inpt, Theme
 
 class Console():        
     def ui(self):
-        pass
+        cl = Theme.get_colors()
+        art = [
+            "█▀▀▄ ▀▀█ ▀█─█▀ 　 ▀▀█▀▀ █▀▀█ █▀▀█ █── █▀▀ ",
+            "█──█ ▄▀─ ─█▄█─ 　 ──█── █──█ █──█ █── ▀▀█ ",
+            "▀──▀ ▀▀▀ ──▀── 　 ──▀── ▀▀▀▀ ▀▀▀▀ ▀▀▀ ▀▀▀ ",
+        ]
+        for l in art:
+            print(Colorate.Horizontal(cl["head"], l.center(shutil.get_terminal_size().columns)))
+        print()
 
     def printer(self, color, status, code):
         cl = Theme.get_colors()

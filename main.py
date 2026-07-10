@@ -364,7 +364,15 @@ def run_app():
                     current_page = (current_page + 1) % len(PAGES)
                     continue
                 continue
-            _c_raw = k.decode().strip()
+            buf = k.decode().strip()
+            if buf.isdigit():
+                import time as _t
+                while msvcrt.kbhit():
+                    n = msvcrt.getch().decode().strip()
+                    if n.isdigit():
+                        buf += n
+                    _t.sleep(0.05)
+            _c_raw = buf
         except:
             _c_raw = get_inpt().strip()
         _c = _c_raw.lower()
